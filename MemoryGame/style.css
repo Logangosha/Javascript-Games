@@ -1,0 +1,26 @@
+body {
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    background-color: black;
+}
+
+#ScoreDisplay {
+    font-size: 50px;
+    color: white
+}
+
+#grid{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+
+#grid img{
+    box-sizing: border-box;
+    height: 300px;
+}
+/* #grid img:hover{
+    box-sizing: border-box;
+    border: 5px solid blue;
+} */
