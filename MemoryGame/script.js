@@ -59,8 +59,8 @@ let score = 0
 const gridDisplay = document.querySelector('#grid')
 let cardsChosen = []
 let cardsChosenIds = []
-const cardsWon = []
-const cardsWonId = []
+var cardsWon = []
+var cardsWonId = []
 
 function createBoard() {
     for(let i = 0; i < cardArray.length; i++)
@@ -78,14 +78,14 @@ function createBoard() {
 function imageGainFocus(){
     let id = this.getAttribute('id')
     var alreadyMached = false
-    for(let i = 0; i < cardsWonId.length; i++)
+    for(var i = 0; i < cardsWonId.length; i++)
     {
-        console.log(this.getAttribute('id'))
-        console.log(cardsWonId[i])
-        console.log('-')
-        if(id == cardsWonId.indexOf(i)) {
-            alreadyMached = true
-            console.log("werwlkejflsd")
+        for(var j = 0; j < 2; j++)
+        {
+            if(parseInt(id) === parseInt(cardsWonId[i][j])) {
+                alreadyMached = true
+                break
+            }
         }
     }
     if(alreadyMached) {
@@ -120,19 +120,22 @@ function checkMatch(){
     const optionTwoId = cardsChosenIds[1]
     if(optionOneId === optionTwoId){
         alert('You have clicked the same image twice!')
-    }
-    if(cardsChosen[0] === cardsChosen[1]) {
-        alert('You have found a match')
-        // cards[optionOneId].setAttribute('src', 'images/white.png')
-        // cards[optionTwoId].setAttribute('src', 'images/white.png')
-        cards[optionOneId].removeEventListener('click', flipCard)
-        cards[optionTwoId].removeEventListener('click', flipCard)
-        cardsWon.push(cardsChosen)
-        cardsWonId.push(cardsChosenIds)
-    }
-    else{
         cards[optionOneId].setAttribute('src', 'images/blank.png')
-        cards[optionTwoId].setAttribute('src', 'images/blank.png')
+    }
+    else {
+        if(cardsChosen[0] === cardsChosen[1]) {
+            alert('You have found a match')
+            // cards[optionOneId].setAttribute('src', 'images/white.png')
+            // cards[optionTwoId].setAttribute('src', 'images/white.png')
+            cards[optionOneId].removeEventListener('click', flipCard)
+            cards[optionTwoId].removeEventListener('click', flipCard)
+            cardsWon.push(cardsChosen)
+            cardsWonId.push(cardsChosenIds)
+        }
+        else {
+            cards[optionOneId].setAttribute('src', 'images/blank.png')
+            cards[optionTwoId].setAttribute('src', 'images/blank.png')
+        }
     }
     cardsChosen = []
     cardsChosenIds = []
