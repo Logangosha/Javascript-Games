@@ -1,0 +1,57 @@
+body {
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    background-image: url("images/grass.jpg");
+    background-position: center;
+}
+
+h2 {
+    background-color: black;
+    color: white;
+    margin: 0px;
+    padding: 10px;
+}
+
+.grid {
+    background-color: white;
+    display: flex;
+    flex-flow: row wrap;
+    width: 600px;
+    margin: auto;
+    border: 1px solid black;
+}
+
+.square{
+    width: 200px;
+    height: 200px;
+    border: 1px solid black;
+    box-sizing: border-box;
+}
+
+.mole {
+    background-image: url("images/mole-2.webp");
+    background-size: contain;
+}
+
+button {
+    background-color: black;
+    color:white;
+    border: 2px solid black;
+    padding: 5px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+button:hover {
+    background-color: white;
+    color: black;
+}
+
+
+.rat {
+    background-image: url("images/rat-1.webp");
+    background-size: cover;
+    background-position: center;
+    
+}
