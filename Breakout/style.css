@@ -1,3 +1,13 @@
+
+
+.row {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    margin: auto;
+    padding-top: 100px;
+}
+
 .grid {
     position: absolute;
     width: 560px;
@@ -17,4 +27,12 @@
     width:100px;
     height: 20px;
     background-color: purple;
+}
+
+.ball {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: red;
+    border-radius: 10px;
 }
