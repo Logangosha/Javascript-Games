@@ -1,62 +1,65 @@
 const grid = document.querySelector('.grid')
 const blockWidth = 100
 const blockHeight = 20
-const boardWidth = 300
+const boardWidth = 560
 const boardHeight = 300
 const ballDiameter = 20
 let currentDirection = 'upRight'
 let xDirection = 2
 let yDirection = 2
 let timerId
+let blockAreas = []
+
 
 const userStart = [230, 10]
 let currentPosition = userStart
 const ballStart = [270, 40]
 let ballPosition = ballStart
 
-// create Block
-// class Block {
-//     constructor(xAxis, yAxis) {
-//         this.bottomLeft = [xAxis,yAxis]
-//         this.bottomRight = [xAxis + blockWidth, yAxis]
-//         this.topLeft = [xAxis, yAxis + blockHeight]
-//         this.topRight = [xAxis + blockWidth, yAxis + blockHeight]
-//     }
-// }
+//create Block
+class Block {
+    constructor(xAxis, yAxis) {
+        this.bottomLeft = [xAxis,yAxis]
+        this.bottomRight = [xAxis + blockWidth, yAxis]
+        this.topLeft = [xAxis, yAxis + blockHeight]
+        this.topRight = [xAxis + blockWidth, yAxis + blockHeight]
+        blockAreas.push([this.bottomLeft, this.bottomRight, this.topLeft, this.topRight])
+    }
+}
 
-// all my blocks
-// const blocks = [
-//     new Block(10,270),
-//     new Block(120,270),
-//     new Block(230,270),
-//     new Block(340,270),
-//     new Block(450,270),
+//all my blocks
+const blocks = [
+    new Block(10,270),
+    new Block(120,270),
+    new Block(230,270),
+    new Block(340,270),
+    new Block(450,270),
 
-//     new Block(10,240),
-//     new Block(120,240),
-//     new Block(230,240),
-//     new Block(340,240),
-//     new Block(450,240),
+    new Block(10,240),
+    new Block(120,240),
+    new Block(230,240),
+    new Block(340,240),
+    new Block(450,240),
 
-//     new Block(10,210),
-//     new Block(120,210),
-//     new Block(230,210),
-//     new Block(340,210),
-//     new Block(450,210),
-// ]
+    new Block(10,210),
+    new Block(120,210),
+    new Block(230,210),
+    new Block(340,210),
+    new Block(450,210),
+]
 
-// draw all of my blocks
-// function addBlocks() {
-//     for(let i = 0; i < blocks.length; i++) {
-//         const block = document.createElement('div')
-//         block.classList.add('block')
-//         block.style.left = blocks[i].bottomLeft[0] + 'px'
-//         block.style.bottom = blocks[i].bottomLeft[1] + 'px'
-//         grid.appendChild(block) 
-//     }
-// }
+//draw all of my blocks
+function addBlocks() {
+    for(let i = 0; i < blocks.length; i++) {
+        const block = document.createElement('div')
+        block.classList.add('block')
+        block.style.left = blocks[i].bottomLeft[0] + 'px'
+        block.style.bottom = blocks[i].bottomLeft[1] + 'px'
+        grid.appendChild(block) 
+    }
+}
 
-//addBlocks()
+addBlocks()
 
 // add user
 const user = document.createElement('div')
@@ -85,7 +88,7 @@ function moveBall() {
     checkForCollisions()
 }
 
-timerId = setInterval(moveBall, 30)
+timerId = setInterval(moveBall, 10)
 
 
 // check for collisions
@@ -102,22 +105,49 @@ function checkForCollisions() {
     }
     else if(ballPosition[1] <= 0)
     {
-        alert("You lose!")
         clearInterval(timerId)
+        alert("You lose!")
     }
     else if(ballPosition[1] + ballDiameter >= boardHeight)
     {
         changeDirection('top')
-    }  // check for user collisions
-    else if(ballPosition[1] === currentPosition[1] + blockHeight && ballPosition[0] >= currentPosition[0] && ballPosition[0] <= currentPosition[0] + blockWidth) {
+    }  
+    // check for user collisions
+    if(ballPosition[1] === currentPosition[1] + blockHeight && ballPosition[0] <= currentPosition[0] + blockWidth && ballPosition[0] + ballDiameter >= currentPosition[0]) {
+        console.log("collision")
         changeDirection('bottom')
     }
-    else if(ballPosition[1] <= currentPosition[1] + blockHeight && ballPosition[1] >= currentPosition[1] && ballPosition[0] + ballDiameter === currentPosition[0]) {
+    else if(ballPosition[1] <= currentPosition[1] + blockHeight && ballPosition[1] + ballDiameter >= currentPosition[1] && ballPosition[0] + ballDiameter === currentPosition[0]) {
         changeDirection('right')
     }
-    else if(ballPosition[1] <= currentPosition[1] + blockHeight && ballPosition[1] >= currentPosition[1] && ballPosition[0] === currentPosition[0] + blockWidth) {
+    else if(ballPosition[1] <= currentPosition[1] + blockHeight && ballPosition[1] + ballDiameter >= currentPosition[1] && ballPosition[0] === currentPosition[0] + blockWidth) {
         changeDirection('left')
+    } // check for block collisions
+    for(let i = 0; i < blockAreas.length; i++) {
+        if(ballPosition[0] <= blockAreas[i][1][0] && ballPosition[0] + ballDiameter >= blockAreas[i][0][0] && ballPosition[1] + ballDiameter === blockAreas[i][0][1]) {
+            changeDirection("top")
+            removeBlock(i)
+        }
+        else if(ballPosition[0] >= blockAreas[i][0][0] && ballPosition[0] + ballDiameter <= blockAreas[i][1][0] && ballPosition[1] === blockAreas[i][0][1]) {
+            changeDirection("bottom")
+            removeBlock(i)
+        }
+        else if(ballPosition[0] === blockAreas[i][1][0] && ballPosition[1] + ballDiameter >= blockAreas[i][1][1] && ballPosition[1] <= blockAreas[i][2][1]) {
+            changeDirection("left")
+            removeBlock(i)
+        }
+        else if(ballPosition[0] + ballDiameter === blockAreas[i][0][0] && ballPosition[1] + ballDiameter >= blockAreas[i][0][1] && ballPosition[1] <= blockAreas[i][2][1]) {
+            changeDirection("right")
+            removeBlock(i)
+        }
     }
+}
+
+console.log(blockAreas[blockAreas.length -1][0][0]);
+
+function removeBlock(i){
+        blockAreas.splice(blockAreas.indexOf(blockAreas[i]), 1)
+        grid.removeChild(grid.childNodes[i])
 }
 
 function changeDirection(hitLocation) {
