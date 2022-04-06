@@ -10,7 +10,7 @@
 
 .grid {
     position: absolute;
-    width: 560px;
+    width: 300px;
     height: 300px;
     border: solid black 1px;
 }
@@ -34,5 +34,4 @@
     width: 20px;
     height: 20px;
     background-color: red;
-    border-radius: 10px;
 }
