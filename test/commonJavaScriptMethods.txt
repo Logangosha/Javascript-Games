@@ -1,0 +1,87 @@
+JavaScript Functions
+====================
+1. .getElementbyId(id)
+
+   returns element object associated with the id parameter	
+
+2. .querySelectorAll(selectors)
+
+    returns a static NodeList representing a list of the documents elements that match the specified group of selectors	
+
+3. .addEventListener(typeOfEvent, listenerFunction)
+ 
+   function that will be called whenever the specified event is delivered to the target 
+   common targets include Element, Document, and window   	
+
+4. .innerHTML
+
+   gets or sets the HTML contained within the element.
+
+5. Math.random()
+
+   returns a floating-point, pseudo-random number in the range 0 to less than 1 (inclusive of 0, but not 1)
+
+6. Math.floor()
+
+   returns the largest integer less than or wqual to a given number 
+   ex: 5 => 5; 6.99999 => 6; 5.05 => 5; -5.99 => 6;
+
+7. .sort()
+
+    sorts array in accending order
+
+8. .querySelector(selector)
+
+    eturns the first Element within the document that matches the specified selector, or group of selectors.
+    If no matches are found, null is returned.
+
+9. .createElement(tagName)
+
+    creates the HTML element specified by tagName
+    ex: .createElement('div')
+
+10. .setAttribute(name, value)
+
+    Sets the value of an attribute on the specified element.    
+
+11. .appendChild()
+12. getAttribute()
+13. parseInt()
+14. .push()
+15. setTimeout()
+16. alert()
+17. .removeEventListener()
+18. .forEach()
+19. .classList
+20. .classList.Add()
+21. .classList.remove()
+22. .classList.contains()
+23. setInterval()
+24. clearInterval()
+25. class
+26. .style.left
+27. .style.right
+28. .style.top
+29. .style.bottom
+30. .splice()
+31. .indexOf()
+32. removeChild()
+33. e (event)
+34. arrow function () =>
+35. .map() 
+36. .filter()
+37. .some()
+38. .every()
+39. Array.from()
+40. Object.assign()
+41. String.split()
+42. String.slice()
+43. String.indexOf()
+44. .reduce()
+45. .includes()
+46. .shift()
+47. .unshift()
+48. .fill()
+49. .find()
+50. .reverse()
+
