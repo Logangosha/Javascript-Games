@@ -21,7 +21,7 @@ startGameButton.addEventListener('click', moveTarget)
      }
  }
 
-function moveTarget(event) {
+function moveTarget(e) {
     var count = 59
     var timer = setInterval(function() {
         timeLeft.textContent = (count--);
@@ -36,13 +36,13 @@ function moveTarget(event) {
     var moleInteraval = setInterval(randomSquare, 410)
 }
 
-function hit(event) {
-    if(event.target.classList.contains("mole"))
+function hit(e) {
+    if(e.target.classList.contains("mole"))
     {   
         result++
         score.innerHTML = result
     }
-    else if(event.target.classList.contains("rat"))
+    else if(e.target.classList.contains("rat"))
     {   
         result--
         score.innerHTML = result
